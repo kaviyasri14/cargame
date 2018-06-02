@@ -1,0 +1,29 @@
+<html>
+        
+	<head>
+			<link rel="stylesheet" href="car.css">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script src="car.js"></script>
+        
+	</head>
+
+	<body onkeydown='getKeyAndMove(event)' >
+			<center><h1>score:</h1><h1 id="result"></h1></center>
+            <div class="container" id="contain">
+				<div class="row" >
+                    <img id="image1" src="swift.png" >	
+				</div>
+				<br><br>
+				
+			</div>
+			<div id="start">
+				<button class="btn-lg btn-danger"onclick="start_Car()" >START</button>&nbsp;&nbsp;&nbsp;
+				<button class="btn-lg btn-danger" onclick="stop_Car()">STOP</button>
+				
+			</div>
+			<div id="mus"></div>
+
+	</body>
+</html>

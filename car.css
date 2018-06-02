@@ -1,0 +1,36 @@
+body{
+    background-image: url("animation.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#contain
+{
+    background-image: url("road.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin:5vh 10vw;
+   
+    width:80%;
+    height:70%;
+    
+}
+img{
+    position:relative;
+    margin-top :35px;
+     margin-left:5px;
+    width:60px;
+    height:100px;
+
+}
+#start{
+    padding-left: 40%;
+}
+.row
+{
+    position:fixed;
+}
+h1{
+    text-align: center;
+    display: inline;
+}
