@@ -9,7 +9,7 @@ body{
     background-image: url("road.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    margin:5vh 10vw;
+    margin-top: 5vh;
    
     width:80%;
     height:70%;
@@ -33,4 +33,19 @@ img{
 h1{
     text-align: center;
     display: inline;
+    text-decoration-color: red;
+  
+}
+input
+{
+    background-color: transparent;
+   
+}
+#bestscore,#result
+{
+    font-size: 30px;
+    font-weight: bold;
+}
+#result{
+    text-align: left;
 }
