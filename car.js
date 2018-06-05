@@ -4,11 +4,13 @@ var counter=0;
 var id;
 var status="stop";
 var i=100;
+var lost=false;
 var right,bottom;
+var highscore=0;
 // $(document).ready(function(){
 //     $("#start").click(function(){
-//         x = $("#contain").position();
-//         right=$('#contain').css('right');
+//         x = $(".container").position();
+//         right=$('.container').css('right');
 //         console.log(right);
 //         bottom=x.bottom;
 //     });
@@ -19,10 +21,32 @@ var dir="r";
 				objImage.style.position='relative';
 				objImage.style.left=0;
                 objImage.style.top=0;
-                
                 var key_code;
+                document.getElementById("bestscore").innerHTML=localStorage.getItem("highscore");
+                
+            }
+            function best_Score()
+            {   
+                 highscore=localStorage.getItem("highscore");
+                if(highscore!==null)
+                {
+                    if(score>highscore)
+                    {
+                        localStorage.setItem("highscore",score);
+                        highscore=score;
+
+                    }
+                }else{
+                    localStorage.setItem("highscore",score);
+                }
+                document.getElementById("bestscore").innerHTML=highscore;
+                
+               
             }
             function start_Car(){
+                if(lost==true)
+                {document.location.reload(true);               
+                }
                 status="start";
                 if(dir=="l")
                     id=setInterval(moveLeft,i);
@@ -32,7 +56,7 @@ var dir="r";
                     id=setInterval(moveUp,i);
                 if(dir=="d")
                     id=setInterval(moveDown,i);
-                document.getElementById("mus").innerHTML="<embed src='f1sound.mp3' autostart='true' loop='true' width='2' height='0'></embed>";             
+                document.getElementById("mus").value="<embed src='f1sound.mp3' autostart='trueMath.ceil(' loop='true' width()*1)-30='2' height='0'></embed>";             
             }            
             function stop_Car(){
                 status="stop";
@@ -42,7 +66,7 @@ var dir="r";
 				 key_code=e.which||e.keyCode;
 				switch(key_code){
                     case 32:
-                         //console.log("hi");
+                       
                         if(status=="start"){
                             stop_Car();
                             
@@ -53,7 +77,7 @@ var dir="r";
                         break;
                     case 37:
                     clearInterval(id);
-                    //objImage.style.transform=" scaleY(-1)";
+                  
                     objImage.style.transform=" rotate(180deg)";
                     objImage.style.transform=" scaleX(-1)";
                     id=setInterval( moveLeft,i);
@@ -73,7 +97,7 @@ var dir="r";
 
                     case 40: 
                     clearInterval(id);
-                   // objImage.style.transform= "scaleX(-1)";
+                   
                     objImage.style.transform=" rotate(90deg)";
                     id=setInterval( moveDown,i);
                      
@@ -81,12 +105,20 @@ var dir="r";
 				}
             } 
            function moveLeft(){ 
-
-            if((parseInt(objImage.style.left)<0)||(parseInt(objImage.style.left)>960)||(parseInt(objImage.style.top)<-15)||(parseInt(objImage.style.top)>470))		
+            var containerRight=Math.ceil($(".container").width()*1)-30;
+            var containerDown=Math.ceil($(".container").height()*.8);
+            // console.log(containerRight);
+            if((parseInt(objImage.style.left)<0)||(parseInt(objImage.style.left)>containerRight)||(parseInt(objImage.style.top)<-25)||(parseInt(objImage.style.top)>containerDown))		
             {
                 alert("game over");
-                clearInterval(id); 
+                clearInterval(id);
+             
+                lost=true;
                 document.getElementById("result").innerHTML=score;
+                best_Score(); 
+              
+                
+                
                 return;                  
             }
             dir="l";
@@ -95,38 +127,48 @@ var dir="r";
 
             if(counter%15==0)
             {
-                i=i-2;
+                i=i-1;
             }	     
-                objImage.style.left=parseInt(objImage.style.left)-5 +'px';
+                objImage.style.left=parseInt(objImage.style.left)-10 +'px';
            }
 
             
 			
             function moveUp()	{
-                if((parseInt(objImage.style.left)<0)||(parseInt(objImage.style.left)>960)||(parseInt(objImage.style.top)<-15)||(parseInt(objImage.style.top)>470))		
+            var containerRight=Math.ceil($(".container").width()*1)-30;
+            var containerDown=Math.ceil($(".container").height()*.8);                            
+                if((parseInt(objImage.style.left)<0)||(parseInt(objImage.style.left)>containerRight)||(parseInt(objImage.style.top)<-25)||(parseInt(objImage.style.top)>containerDown))		
                 {
                     alert("game over");
                     clearInterval(id);  
+                    lost=true;
                     document.getElementById("result").innerHTML=score;
-                    return;                  
+                    best_Score(); 
+                     return;                  
                 }	
                 dir="t";
                 counter++;
                 score++;
                 if(counter%15==0)
             {
-                i=i-2;
+                i=i-1;
             }
-                objImage.style.top=parseInt(objImage.style.top)-5 +'px';
+                objImage.style.top=parseInt(objImage.style.top)-10 +'px';
             }
 			
 			function moveRight(){
-               	
-                if((parseInt(objImage.style.left)<0)||(parseInt(objImage.style.left)>960)||(parseInt(objImage.style.top)<-15)||(parseInt(objImage.style.top)>470))		
+            var containerRight=Math.ceil($(".container").width()*1)-30; 
+            var containerDown=Math.ceil($(".container").height()*.8);                          	
+                if((parseInt(objImage.style.left)<0)||(parseInt(objImage.style.left)>containerRight)||(parseInt(objImage.style.top)<-25)||(parseInt(objImage.style.top)>containerDown))		
             {
                 alert("game over");
                 clearInterval(id);
+                lost=true;
                 document.getElementById("result").innerHTML=score;
+                best_Score();
+               
+                
+
                 return;                      
             }	
             dir="r";
@@ -134,18 +176,23 @@ var dir="r";
             score++;
             if(counter%15==0)
             {
-                i=i-2;
+                i=i-1;
             }
-				objImage.style.left=parseInt(objImage.style.left)+5 +'px';
+				objImage.style.left=parseInt(objImage.style.left)+10 +'px';
 			}
 			function moveDown(){
-               	
-                if((parseInt(objImage.style.left)<0)||(parseInt(objImage.style.left)>960)||(parseInt(objImage.style.top)<-15)||(parseInt(objImage.style.top)>470))		
+            var containerRight=Math.ceil($(".container").width()*1)-30;
+            var containerDown=Math.ceil($(".container").height()*.8);                           	
+                if((parseInt(objImage.style.left)<0)||(parseInt(objImage.style.left)>containerRight)||(parseInt(objImage.style.top)<-25)||(parseInt(objImage.style.top)>containerDown))		
                 {
                     alert("game over");
                     
-                    clearInterval(id);  
+                    clearInterval(id); 
+                    lost=true; 
                     document.getElementById("result").innerHTML=score;
+                    best_Score();
+                   
+                    
                     return;               
                 }	
                 dir="d";
@@ -153,9 +200,9 @@ var dir="r";
                 score++;
                 if(counter%15==0)
             {
-                i=i-2;
+                i=i-1;
             }
-				objImage.style.top=parseInt(objImage.style.top)+5 +'px';
+				objImage.style.top=parseInt(objImage.style.top)+10 +'px';
             }
             
              window.onload=init;
